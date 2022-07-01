@@ -1,0 +1,40 @@
+﻿@using StatiiElectriceWebApp.Models.DB
+@model Statii
+
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Statie</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nume)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nume)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Oras)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Oras)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Adresa)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Adresa)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="GetStatii">Back to List</a>
+</div>
