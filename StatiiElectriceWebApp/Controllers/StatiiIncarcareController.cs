@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StatiiElectriceWebApp.Models.DB;
+using System.Dynamic;
 
 namespace StatiiElectriceWebApp.Controllers
 {
@@ -28,12 +29,14 @@ namespace StatiiElectriceWebApp.Controllers
                 return NotFound();
             }
 
-            var statie = _statiiIncarcare.Statiis
+            Statii statie = _statiiIncarcare.Statiis
             .FirstOrDefault(m => m.Id == id);
             if (statie == null)
             {
                 return NotFound();
             }
+
+            //statie.Prize = _statiiIncarcare.Prizes.Where(p => p.Id);
 
             return View(statie);
         }
