@@ -23,6 +23,14 @@ namespace StatiiElectriceWebApp.Models.DB
             Adresa = adresa;
         }
 
+        public Statii(int id, string nume, string oras, string adresa)
+        {
+            Id = id;
+            Nume = nume;
+            Oras = oras;
+            Adresa = adresa;
+        }
+
         public virtual ICollection<Prize> Prizes { get; set; }
     }
 }

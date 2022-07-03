@@ -36,12 +36,15 @@
 
     <table>
         <tr>
-            <th>Prize</th>
+            <th>
+                Tip prize
+            </th>
         </tr>
+        @foreach (Prize item in Model.Prizes) {
         <tr>
-            <td></td>
-            <td></td>
+            <td>@item.Tip.Nume</td>
         </tr>
+        }
     </table>
 </div>
 <div>

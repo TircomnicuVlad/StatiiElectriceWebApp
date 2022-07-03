@@ -36,7 +36,10 @@ namespace StatiiElectriceWebApp.Controllers
                 return NotFound();
             }
 
-            //statie.Prize = _statiiIncarcare.Prizes.Where(p => p.Id);
+            statie.Prizes = _statiiIncarcare.Prizes.Where(p => p.StatieId.Equals(statie.Id)).ToArray();
+            foreach (Prize item in statie.Prizes){
+                item.Tip = _statiiIncarcare.Tips.FirstOrDefault(t => t.Id == item.TipId);
+            }
 
             return View(statie);
         }
@@ -63,43 +66,41 @@ namespace StatiiElectriceWebApp.Controllers
         // GET: StatiiIncarcareController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            Statii statie = _statiiIncarcare.Statiis
+            .FirstOrDefault(m => m.Id == id);
+            if (statie == null)
+            {
+                return NotFound();
+            }
+            return View(statie);
         }
 
         // POST: StatiiIncarcareController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(IFormCollection form)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+            var statie = new Statii(Int32.Parse(form["id"]) ,form["nume"], form["Oras"], form["Adresa"]);
 
-        // GET: StatiiIncarcareController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
+            _statiiIncarcare.Statiis.Update(statie);
+            _statiiIncarcare.SaveChanges();
+            return RedirectToAction("GetStatii");
         }
 
         // POST: StatiiIncarcareController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            Statii statie = _statiiIncarcare.Statiis.FirstOrDefault(s => s.Id == id);
+            _statiiIncarcare.Statiis.Remove(statie);
+            _statiiIncarcare.SaveChanges();
+            return RedirectToAction("GetStatii");
         }
     }
 }
