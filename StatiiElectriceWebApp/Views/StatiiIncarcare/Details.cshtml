@@ -42,6 +42,7 @@
         </tr>
         @foreach (Prize item in Model.Prizes) {
         <tr>
+            <td>@item.Tip.Id</td>
             <td>@item.Tip.Nume</td>
         </tr>
         }
@@ -49,5 +50,7 @@
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a>Booking</a> |
+    <
     <a asp-action="GetStatii">Back to List</a>
 </div>

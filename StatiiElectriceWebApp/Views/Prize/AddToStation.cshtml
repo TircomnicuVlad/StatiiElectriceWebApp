@@ -1,0 +1,28 @@
+﻿@using StatiiElectriceWebApp.Models.ViewModels
+@model PrizaViewModel
+
+<h1>Adauga o noua priza</h1>
+
+<div>
+    <form asp-controller="Prize" asp-action=" AddToStation" method="post" >
+        <div>
+            <label asp-for = "Tip" >Tip</label>
+        </div>
+        <div>
+            <select>
+                <option >Selecteaza tipul de priza</option>
+            </select>
+            @foreach (var item in Model.Tipuri)
+            {
+                <option>@item.Nume</option>
+            }
+        </div>
+        <div>
+            <input type="submit" value="Adauga" class="btn btn-default"/>
+        </div>
+        <div>
+            <a asp-action="GetStatii">Back to List</a>
+        </div>
+    </form>
+</div>
+

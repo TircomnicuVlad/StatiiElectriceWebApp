@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StatiiElectriceWebApp.Models.DB;
+using Microsoft.EntityFrameworkCore;
 using System.Dynamic;
 
 namespace StatiiElectriceWebApp.Controllers
@@ -29,17 +30,17 @@ namespace StatiiElectriceWebApp.Controllers
                 return NotFound();
             }
 
-            Statii statie = _statiiIncarcare.Statiis
+            Statii statie = _statiiIncarcare.Statiis.Include(x => x.Prizes).ThenInclude(s => s.Tip)
             .FirstOrDefault(m => m.Id == id);
             if (statie == null)
             {
                 return NotFound();
             }
 
-            statie.Prizes = _statiiIncarcare.Prizes.Where(p => p.StatieId.Equals(statie.Id)).ToArray();
+           /* statie.Prizes = _statiiIncarcare.Prizes.Where(p => p.StatieId.Equals(statie.Id)).ToArray();
             foreach (Prize item in statie.Prizes){
                 item.Tip = _statiiIncarcare.Tips.FirstOrDefault(t => t.Id == item.TipId);
-            }
+            }*/
 
             return View(statie);
         }
@@ -98,6 +99,7 @@ namespace StatiiElectriceWebApp.Controllers
         public ActionResult Delete(int id)
         {
             Statii statie = _statiiIncarcare.Statiis.FirstOrDefault(s => s.Id == id);
+
             _statiiIncarcare.Statiis.Remove(statie);
             _statiiIncarcare.SaveChanges();
             return RedirectToAction("GetStatii");
