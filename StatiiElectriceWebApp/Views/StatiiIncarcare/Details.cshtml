@@ -44,6 +44,7 @@
         <tr>
             <td>@item.Tip.Id</td>
             <td>@item.Tip.Nume</td>
+            <td><a asp-controller="Prize" asp-action="Delete" asp-route-id="@item.Id">Sterge Priza</a></td>
         </tr>
         }
     </table>
