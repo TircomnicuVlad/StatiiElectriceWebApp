@@ -9,6 +9,9 @@ namespace StatiiElectriceWebApp.Models.DB
         public int StatieId { get; set; }
         public int TipId { get; set; }
 
+        public virtual Statii Statie { get; set; } = null!;
+        public virtual Tip Tip { get; set; } = null!;
+
         public Prize() { }
         public Prize(int tipId, int statieId)
         {
@@ -22,8 +25,5 @@ namespace StatiiElectriceWebApp.Models.DB
             TipId = tipId;
             Id = id;
         }
-
-        public virtual Statii Statie { get; set; } = null!;
-        public virtual Tip Tip { get; set; } = null!;
     }
 }

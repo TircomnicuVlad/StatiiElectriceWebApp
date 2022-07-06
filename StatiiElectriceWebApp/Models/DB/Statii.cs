@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StatiiElectriceWebApp.Models.DB;
+using System;
 using System.Collections.Generic;
 
 namespace StatiiElectriceWebApp.Models.DB
@@ -10,11 +11,12 @@ namespace StatiiElectriceWebApp.Models.DB
             Prizes = new HashSet<Prize>();
         }
 
-
         public int Id { get; set; }
         public string Nume { get; set; } = null!;
         public string Oras { get; set; } = null!;
         public string Adresa { get; set; } = null!;
+
+        public virtual ICollection<Prize> Prizes { get; set; }
 
         public Statii(string nume, string oras, string adresa)
         {
@@ -30,7 +32,5 @@ namespace StatiiElectriceWebApp.Models.DB
             Oras = oras;
             Adresa = adresa;
         }
-
-        public virtual ICollection<Prize> Prizes { get; set; }
     }
 }

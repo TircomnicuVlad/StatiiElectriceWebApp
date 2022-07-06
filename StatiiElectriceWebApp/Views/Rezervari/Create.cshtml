@@ -1,0 +1,39 @@
+﻿@using StatiiElectriceWebApp.Models.ViewModels
+@model RezervariViewModel
+
+<h1>Booking</h1>
+
+<div>
+    <form asp-controller="Rezervari" asp-action="Add" method="post" >
+        <div>
+            <label asp-for="StartDate">Start</label>
+        </div>
+        <div>
+            <input asp-for="StartDate"/>
+            <span asp-validation-for="StartDate" class="text-danger field-validation-valid"></span>
+        </div>
+        <div>
+            <label asp-for="EndDate">End</label>
+        </div>
+        <div>
+            <input asp-for="EndDate" />
+            <span asp-validation-for="EndDate" class="text-danger field-validation-valid"></span>
+        </div>
+        <div>
+            <input asp-for="PrizaId" type = "text" name="PrizaId" value="@Model.PrizaId" hidden/>
+        </div> 
+        <div>
+            <label asp-for="NrMasina">Nr. Inmatriculare Masina</label>
+        </div>
+        <div>
+            <input asp-for="NrMasina"/>
+            <span asp-validation-for="NrMasina" class="text-danger field-validation-valid"></span>
+        </div>
+        <div>
+            <input type="submit" value="Add" class="btn btn-default"/>
+        </div>
+        <div>
+            <a asp-controller="StatiiIncarcare" asp-action="GetStatii">Back to List</a>
+        </div>
+    </form>
+</div>

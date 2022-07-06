@@ -104,5 +104,15 @@ namespace StatiiElectriceWebApp.Controllers
             _statiiIncarcare.SaveChanges();
             return RedirectToAction("GetStatii");
         }
+
+        public ActionResult Filter(String txt)
+        {
+            if (txt == null)
+            {
+                return RedirectToAction("GetStatii");
+            }
+
+            return View(txt);
+        }
     }
 }

@@ -45,13 +45,13 @@
             <td>@item.Tip.Id</td>
             <td>@item.Tip.Nume</td>
             <td><a asp-controller="Prize" asp-action="Delete" asp-route-id="@item.Id">Sterge Priza</a></td>
+            <td><a asp-controller="Rezervari" asp-action="Create" asp-route-id="@item.Id">Booking</a></td>
         </tr>
         }
     </table>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a>Booking</a> |
     <a asp-controller="Prize" asp-action="AddToStation" asp-route-id="@Model.Id">Adaugare Priza</a> |
     <a asp-action="GetStatii">Back to List</a>
 </div>

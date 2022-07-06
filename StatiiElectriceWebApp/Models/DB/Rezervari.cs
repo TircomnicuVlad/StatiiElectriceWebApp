@@ -14,5 +14,14 @@ namespace StatiiElectriceWebApp.Models.DB
 
         public virtual Prize Priza { get; set; } = null!;
         public virtual Useri? User { get; set; }
+
+        public Rezervari( DateTime startDate, DateTime endDate, int prizaId, string nrMasina)
+        {
+            Id = new Guid();
+            StartDate = startDate;
+            EndDate = endDate;
+            PrizaId = prizaId;
+            NrMasina = nrMasina;
+        }
     }
 }

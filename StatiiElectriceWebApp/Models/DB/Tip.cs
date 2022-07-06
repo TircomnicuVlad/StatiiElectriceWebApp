@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StatiiElectriceWebApp.Models.DB;
+using System;
 using System.Collections.Generic;
 
 namespace StatiiElectriceWebApp.Models.DB
