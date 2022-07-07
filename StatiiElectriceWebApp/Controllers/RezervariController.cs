@@ -25,18 +25,36 @@ namespace StatiiElectriceWebApp.Controllers
             if (ModelState.IsValid)
             {
                 Rezervari rezervari = new Rezervari(form.StartDate, form.EndDate, form.PrizaId, form.NrMasina);
-                if (rezervari.StartDate < rezervari.EndDate && rezervari.StartDate > DateTime.Now)
+                if (rezervari.StartDate >= rezervari.EndDate)
                 {
-                    _context.Add(rezervari);
-                    _context.SaveChanges();
-                    return RedirectToAction("GetStatii", "StatiiIncarcare");
+                    ModelState.AddModelError(nameof(RezervariViewModel.EndDate), "Data sau ora invalida");
+                }
+                else if (rezervari.StartDate < DateTime.Now)
+                {
+                    ModelState.AddModelError(nameof(RezervariViewModel.StartDate), "Data sau ora invalida");
+                }
+                else
+                {
+                    List<Rezervari> rezervaris = _context.Rezervaris.
+                        Where(r => (r.StartDate >= rezervari.StartDate && r.StartDate < rezervari.EndDate)
+                        || (r.EndDate > rezervari.StartDate && r.EndDate <= rezervari.EndDate)).ToList();
+                    if (rezervaris.Any())
+                    {
+                        ModelState.AddModelError(nameof(RezervariViewModel.StartDate), "Exista deja o rezervare in aceast interval");
+                    }
+                    else
+                    {
+                        _context.Add(rezervari);
+                        _context.SaveChanges();
+                        return RedirectToAction("GetStatii", "StatiiIncarcare");
+                    }
                 }
             }
             //ModelState.ClearValidationState(nameof(RezervariViewModel.NrMasina));
             //ModelState.AddModelError(nameof(RezervariViewModel.StartDate), "Introdu o data si o ora valida");
             //ModelState.AddModelError(nameof(RezervariViewModel.EndDate), "Introdu o data si o ora valida");
             //ModelState.AddModelError(nameof(RezervariViewModel.NrMasina), "Introdu nr de inmatriculare al masinii");
-           
+
             return View("Create", form);
         }
     }

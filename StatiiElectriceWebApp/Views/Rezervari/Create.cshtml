@@ -9,14 +9,14 @@
             <label asp-for="StartDate">Start</label>
         </div>
         <div>
-            <input asp-for="StartDate"/>
+            <input asp-format="{0:dd/MM/yyyy hh:mm}" asp-for="StartDate" />
             <span asp-validation-for="StartDate" class="text-danger field-validation-valid"></span>
         </div>
         <div>
             <label asp-for="EndDate">End</label>
         </div>
         <div>
-            <input asp-for="EndDate" />
+            <input asp-format="{0:dd/MM/yyyy hh:mm}" asp-for="EndDate" />
             <span asp-validation-for="EndDate" class="text-danger field-validation-valid"></span>
         </div>
         <div>
