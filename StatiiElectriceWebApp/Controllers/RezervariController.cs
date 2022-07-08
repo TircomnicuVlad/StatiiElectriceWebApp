@@ -35,10 +35,12 @@ namespace StatiiElectriceWebApp.Controllers
                 }
                 else
                 {
-                    List<Rezervari> rezervaris = _context.Rezervaris.
-                        Where(r => (r.StartDate >= rezervari.StartDate && r.StartDate < rezervari.EndDate)
-                        || (r.EndDate > rezervari.StartDate && r.EndDate <= rezervari.EndDate)).ToList();
-                    if (rezervaris.Any())
+                    var rezervaris = _context.Rezervaris.
+                        Any(r => ((r.StartDate >= rezervari.StartDate && r.StartDate < rezervari.EndDate)
+                        || (r.EndDate > rezervari.StartDate && r.EndDate <= rezervari.EndDate) ||
+                        (r.StartDate < rezervari.StartDate && r.EndDate > rezervari.EndDate))
+                        && r.PrizaId == rezervari.PrizaId);
+                    if (rezervaris)
                     {
                         ModelState.AddModelError(nameof(RezervariViewModel.StartDate), "Exista deja o rezervare in aceast interval");
                     }
