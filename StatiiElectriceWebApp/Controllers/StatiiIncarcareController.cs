@@ -105,14 +105,18 @@ namespace StatiiElectriceWebApp.Controllers
             return RedirectToAction("GetStatii");
         }
 
-        public ActionResult Filter(String txt)
+        public ActionResult Filter(IFormCollection form)
         {
+            String txt = form["search"];
             if (txt == null)
             {
                 return RedirectToAction("GetStatii");
             }
 
-            return View(txt);
+            List <Statii> statii = _statiiIncarcare.Statiis.
+                Where(s => s.Nume.Contains(txt) || s.Adresa.Contains(txt) 
+                || s.Oras.Contains(txt)).ToList();
+            return View("GetStatii", statii);
         }
     }
 }
