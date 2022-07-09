@@ -1,6 +1,6 @@
 ﻿@using StatiiElectriceWebApp.Models.DB
 @using StatiiElectriceWebApp.Models.ViewModels
-@model CalendarViewModelcs
+@model CalendarViewModel
 
 <br />
 <div class="cd-schedule loading">
@@ -63,14 +63,14 @@
 			<li class="events-group">
 				<div class="top-info"><span>Monday</span></div>
 				<ul>
-					#TODO PARCURGERE REZERVARI DOAR DIN ZIUA DE LUNI, SAPTAMANA CURENTA
-					#foreach (var item in Model["Monday"]){
-						#<li class="single-event" data-start="item.StartDate" data-end="item.EndDate" data-event="item.Index">
-						#<a href="#0">
-					#		<em class="event-name">item.Nume</em>
-					#	</a>
-					#</li>
-					#}
+					
+					@foreach (var item in Model.calendars[0].rezervari){
+						<li class="single-event" data-start="@item.StartDate.ToString("t")" data-end="@item.EndDate.ToString("t")" data-event="event-1">
+						<a href="#0">
+							<em class="event-name">@item.NrMasina</em>
+						</a>
+					</li>
+					}
 				</ul>
 			</li>
 
@@ -78,29 +78,13 @@
 				<div class="top-info"><span>Tuesday</span></div>
 
 				<ul>
-					<li class="single-event" data-start="10:00" data-end="11:00"  data-content="event-rowing-workout" data-event="event-2">
+					@foreach (var item in Model.calendars[1].rezervari){
+						<li class="single-event" data-start="@item.StartDate.ToString("t")" data-end="@item.EndDate.ToString("t")" data-event="event-1">
 						<a href="#0">
-							<em class="event-name">Rowing Workout</em>
+							<em class="event-name">@item.NrMasina</em>
 						</a>
 					</li>
-
-					<li class="single-event" data-start="11:30" data-end="13:00"  data-content="event-restorative-yoga" data-event="event-4">
-						<a href="#0">
-							<em class="event-name">Restorative Yoga</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="13:30" data-end="15:00" data-content="event-abs-circuit" data-event="event-1">
-						<a href="#0">
-							<em class="event-name">Abs Circuit</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="15:45" data-end="16:45"  data-content="event-yoga-1" data-event="event-3">
-						<a href="#0">
-							<em class="event-name">Yoga Level 1</em>
-						</a>
-					</li>
+					}
 				</ul>
 			</li>
 
@@ -108,29 +92,13 @@
 				<div class="top-info"><span>Wednesday</span></div>
 
 				<ul>
-					<li class="single-event" data-start="09:00" data-end="10:15" data-content="event-restorative-yoga" data-event="event-4">
+					@foreach (var item in Model.calendars[2].rezervari){
+						<li class="single-event" data-start="@item.StartDate.ToString("t")" data-end="@item.EndDate.ToString("t")" data-event="event-1">
 						<a href="#0">
-							<em class="event-name">Restorative Yoga</em>
+							<em class="event-name">@item.NrMasina</em>
 						</a>
 					</li>
-
-					<li class="single-event" data-start="10:45" data-end="11:45" data-content="event-yoga-1" data-event="event-3">
-						<a href="#0">
-							<em class="event-name">Yoga Level 1</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="12:00" data-end="13:45"  data-content="event-rowing-workout" data-event="event-2">
-						<a href="#0">
-							<em class="event-name">Rowing Workout</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="13:45" data-end="15:00" data-content="event-yoga-1" data-event="event-3">
-						<a href="#0">
-							<em class="event-name">Yoga Level 1</em>
-						</a>
-					</li>
+					}
 				</ul>
 			</li>
 
@@ -138,29 +106,13 @@
 				<div class="top-info"><span>Thursday</span></div>
 
 				<ul>
-					<li class="single-event" data-start="09:30" data-end="10:30" data-content="event-abs-circuit" data-event="event-1">
+					@foreach (var item in Model.calendars[3].rezervari){
+						<li class="single-event" data-start="@item.StartDate.ToString("t")" data-end="@item.EndDate.ToString("t")" data-event="event-1">
 						<a href="#0">
-							<em class="event-name">Abs Circuit</em>
+							<em class="event-name">@item.NrMasina</em>
 						</a>
 					</li>
-
-					<li class="single-event" data-start="12:00" data-end="13:45" data-content="event-restorative-yoga" data-event="event-4">
-						<a href="#0">
-							<em class="event-name">Restorative Yoga</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="15:30" data-end="16:30" data-content="event-abs-circuit" data-event="event-1">
-						<a href="#0">
-							<em class="event-name">Abs Circuit</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="17:00" data-end="18:30"  data-content="event-rowing-workout" data-event="event-2">
-						<a href="#0">
-							<em class="event-name">Rowing Workout</em>
-						</a>
-					</li>
+					}
 				</ul>
 			</li>
 
@@ -168,46 +120,26 @@
 				<div class="top-info"><span>Friday</span></div>
 
 				<ul>
-					<li class="single-event" data-start="10:00" data-end="11:00"  data-content="event-rowing-workout" data-event="event-2">
+					@foreach (var item in Model.calendars[4].rezervari){
+						<li class="single-event" data-start="@item.StartDate.ToString("t")" data-end="@item.EndDate.ToString("t")" data-event="event-1">
 						<a href="#0">
-							<em class="event-name">Rowing Workout</em>
+							<em class="event-name">@item.NrMasina</em>
 						</a>
 					</li>
-
-					<li class="single-event" data-start="12:30" data-end="14:00" data-content="event-abs-circuit" data-event="event-1">
-						<a href="#0">
-							<em class="event-name">Abs Circuit</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="15:45" data-end="16:45"  data-content="event-yoga-1" data-event="event-3">
-						<a href="#0">
-							<em class="event-name">Yoga Level 1</em>
-						</a>
-					</li>
+					}
 				</ul>
 			</li>
       <!--        -->
       <li class="events-group">
 				<div class="top-info"><span>Saturday</span></div>
 				<ul>
-					<li class="single-event" data-start="09:30" data-end="10:30" data-content="event-abs-circuit" data-event="event-1">
+					@foreach (var item in Model.calendars[5].rezervari){
+						<li class="single-event" data-start="@item.StartDate.ToString("t")" data-end="@item.EndDate.ToString("t")" data-event="event-1">
 						<a href="#0">
-							<em class="event-name">Abs Circuit</em>
+							<em class="event-name">@item.NrMasina</em>
 						</a>
 					</li>
-
-					<li class="single-event" data-start="11:00" data-end="12:30" data-content="event-rowing-workout" data-event="event-2">
-						<a href="#0">
-							<em class="event-name">Rowing Workout</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="14:00" data-end="15:15"  data-content="event-yoga-1" data-event="event-3">
-						<a href="#0">
-							<em class="event-name">Yoga Level 1</em>
-						</a>
-					</li>
+					}
 				</ul>
 			</li>
 <!--        -->
@@ -216,23 +148,13 @@
       <li class="events-group">
 				<div class="top-info"><span>Sunday</span></div>
 				<ul>
-					<li class="single-event" data-start="09:30" data-end="10:30" data-content="event-abs-circuit" data-event="event-1">
+					@foreach (var item in Model.calendars[6].rezervari){
+						<li class="single-event" data-start="@item.StartDate.ToString("t")" data-end="@item.EndDate.ToString("t")" data-event="event-1">
 						<a href="#0">
-							<em class="event-name">Abs Circuit</em>
+							<em class="event-name">@item.NrMasina</em>
 						</a>
 					</li>
-
-					<li class="single-event" data-start="11:00" data-end="12:30" data-content="event-rowing-workout" data-event="event-2">
-						<a href="#0">
-							<em class="event-name">Rowing Workout</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="14:00" data-end="15:15"  data-content="event-yoga-1" data-event="event-3">
-						<a href="#0">
-							<em class="event-name">Yoga Level 1</em>
-						</a>
-					</li>
+					}
 				</ul>
 			</li>
 <!--        -->

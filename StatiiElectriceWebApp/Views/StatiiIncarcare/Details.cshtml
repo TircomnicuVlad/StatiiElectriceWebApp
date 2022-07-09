@@ -46,6 +46,7 @@
             <td>@item.Tip.Nume</td>
             <td><a asp-controller="Prize" asp-action="Delete" asp-route-id="@item.Id">Sterge Priza</a></td>
             <td><a asp-controller="Rezervari" asp-action="Create" asp-route-id="@item.Id">Booking</a></td>
+            <td><a asp-controller="Disponibilitate" asp-action="Index" asp-route-id="@item.Id">Calendar</a></td>
         </tr>
         }
     </table>
