@@ -5,35 +5,33 @@
 
 <div>
     <form asp-controller="Rezervari" asp-action="Add" method="post" >
-        <div>
+        <div style="padding-top:1%">
             <label asp-for="StartDate">Start</label>
         </div>
         <div>
-            <input value = "@DateTime.Now" asp-for="StartDate" />
+            <input asp-for="StartDate" value = "@DateTime.Now"/>
             <span asp-validation-for="StartDate" class="text-danger field-validation-valid"></span>
         </div>
-        <div>
-            <label asp-for="EndDate">End</label>
+        <div style="padding-top:1%">
+            <label asp-for="EndDate" >End</label>
         </div>
         <div>
-            <input value = "@DateTime.Now" asp-for="EndDate" />
+            <input asp-for="EndDate" value = "@DateTime.Now"/>
             <span asp-validation-for="EndDate" class="text-danger field-validation-valid"></span>
         </div>
         <div>
             <input asp-for="PrizaId" type = "text" name="PrizaId" value="@Model.PrizaId" hidden/>
         </div> 
-        <div>
+        <div style="padding-top:1%">
             <label asp-for="NrMasina">Nr. Inmatriculare Masina</label>
         </div>
         <div>
             <input asp-for="NrMasina"/>
             <span asp-validation-for="NrMasina" class="text-danger field-validation-valid"></span>
         </div>
-        <div>
-            <input type="submit" value="Add" class="btn btn-default"/>
-        </div>
-        <div>
-            <a asp-controller="StatiiIncarcare" asp-action="GetStatii">Back to List</a>
+        <div style="padding-top:1%">
+            <input type="submit" value="Add" class="btn btn-success"/>
+            <a asp-controller="StatiiIncarcare" asp-action="GetStatii" class="btn btn-primary">Back to List</a>
         </div>
     </form>
 </div>

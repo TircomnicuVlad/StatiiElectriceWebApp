@@ -5,7 +5,7 @@
 
 <div>
     <form asp-action="Add" method="post" >
-        <div>
+        <div style="padding-top:1%">
             <label name = "Tip" asp-for = "Tip" >Tip</label>
         </div>
         <div>
@@ -22,11 +22,9 @@
 
             <input asp-for = "Tipuri" name="Tipuri" value="@Model.Tipuri" hidden />
         </div>
-        <div>
-            <input type="submit" value="Adauga" class="btn btn-default"/>
-        </div>
-        <div>
-            <a asp-controller="StatiiIncarcare" asp-action="GetStatii">Back to List</a>
+        <div style="padding-top:1%">
+            <input type="submit" value="Adauga" class="btn btn-success"/>
+            <a asp-controller="StatiiIncarcare" asp-action="GetStatii" class="btn btn-primary">Inapoi la lista de statii</a>
         </div>
     </form>
 </div>

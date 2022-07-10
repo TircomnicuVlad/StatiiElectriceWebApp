@@ -5,32 +5,30 @@
 
 <div>
     <form asp-controller="StatiiIncarcare" asp-action="Create" method="post" >
-        <div>
+        <div style="padding-top:1%">
             <label for="nume">Nume</label>
         </div>
         <div>
             <input type = "text" id="nume" name="nume" required/>
             <span class="text-danger field-validation-valid" data-valmsg-for="nume" data-valmsg-replace="true"></span>
         </div>
-        <div>
+        <div style="padding-top:1%">
             <label for="oras">Oras</label>
         </div>
         <div>
             <input type = "text" id="oras" name="oras" required/>
             <span class="text-danger field-validation-valid" data-valmsg-for="oras" data-valmsg-replace="true"></span>
         </div>
-        <div>
+        <div style="padding-top:1%">
             <label for="adresa">Adresa</label>
         </div>
         <div>
             <input type = "text" id="adresa" name="adresa" required/>
             <span class="text-danger field-validation-valid" data-valmsg-for="adresa" data-valmsg-replace="true"></span>
         </div> 
-        <div>
-            <input type="submit" value="Adauga" class="btn btn-default"/>
-        </div>
-        <div>
-            <a asp-action="GetStatii">Back to List</a>
+        <div style="padding-top:1%">
+            <input type="submit" value="Adauga" class="btn btn-success"/>
+            <a asp-action="GetStatii" class="btn btn-primary">Inapoi la lista de statii</a>
         </div>
     </form>
 </div>

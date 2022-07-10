@@ -10,7 +10,7 @@
 
 <h1>Detalii</h1>
 
-<div>
+<div class="row justify-content-center">
     <h4>Statie</h4>
     <hr />
     <dl class="row">
@@ -34,9 +34,9 @@
         </dd>
     </dl>
 
-    <table>
+    <table class="table table-responsive">
         <tr>
-            <th>
+            <th style="border-bottom:none">
                 Tip prize
             </th>
         </tr>
@@ -44,15 +44,15 @@
         <tr>
             <td>@item.Tip.Id</td>
             <td>@item.Tip.Nume</td>
-            <td><a asp-controller="Prize" asp-action="Delete" asp-route-id="@item.Id">Sterge Priza</a></td>
-            <td><a asp-controller="Rezervari" asp-action="Create" asp-route-id="@item.Id">Booking</a></td>
-            <td><a asp-controller="Disponibilitate" asp-action="Index" asp-route-id="@item.Id">Calendar</a></td>
+            <td><a asp-controller="Prize" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Sterge Priza</a></td>
+            <td><a asp-controller="Rezervari" asp-action="Create" asp-route-id="@item.Id" class="btn btn-primary">Booking</a></td>
+            <td><a asp-controller="Disponibilitate" asp-action="Index" asp-route-id="@item.Id" class="btn btn-success" >Calendar</a></td>
         </tr>
         }
     </table>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-controller="Prize" asp-action="AddToStation" asp-route-id="@Model.Id">Adaugare Priza</a> |
-    <a asp-action="GetStatii">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a> |
+    <a asp-controller="Prize" asp-action="AddToStation" asp-route-id="@Model.Id" class="btn btn-success">Adaugare Priza</a> |
+    <a asp-action="GetStatii" class="btn btn-primary">Inapoi la lista de statii</a>
 </div>

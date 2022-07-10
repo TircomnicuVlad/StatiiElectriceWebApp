@@ -7,29 +7,28 @@
         <div>
             <input type = "hidden" id="id" name="id" value= "@Model.Id" />
         </div>
-        <div>
+        <div style="padding-top:1%">
             <label for="nume">Nume</label>
         </div>
         <div>
             <input type = "text" id="nume" name="nume" value="@Model.Nume" required/>
         </div>
-        <div>
+        <div style="padding-top:1%">
             <label for="oras">Oras</label>
         </div>
         <div>
             <input type = "text" id="oras" name="oras" value="@Model.Oras" required/>
         </div>
-        <div>
+        <div style="padding-top:1%">
             <label for="adresa">Adresa</label>
         </div>
         <div>
             <input type = "text" id="adresa" name="adresa" value="@Model.Adresa" required/>
         </div>
-        <div>
-            <input type="submit" value="Editeaza" class="btn btn-default"/>
+        <div style="padding-top:1%">
+            <input type="submit" value="Modifica" class="btn btn-success"/>
+            <a asp-action="GetStatii" class="btn btn-primary">Inapoi la lista de Statii</a>
         </div>
-        <div>
-            <a asp-action="GetStatii">Back to List</a>
-        </div>
+            
     </form>
 </div>

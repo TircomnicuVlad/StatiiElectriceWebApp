@@ -10,13 +10,21 @@
 @{
 }
 
-<a asp-action="Create">Adauga Statie</a>
-<form asp-action="Filter" method="post">
-      <input type="text" placeholder="Search.." name="search">
-      <button type="submit">Submit</button>
-</form>
+<table class="table align-middle">
+    <tr>
+        <td style="left:0">
+            <a asp-action="Create" class="btn btn-success">Adauga Statie</a>
+        </td>
+        <td style="right:9%; position:absolute; border-bottom:none">
+            <form asp-action="Filter" method="post" style="border-bottom:none">
+                <input type="text" placeholder="Search.." name="search">
+                <button type="submit" class="btn btn-info">Submit</button>
+            </form>
+        </td>
+    </tr>
+</table>
 <div>
-    <table class="table">
+    <table class="table align-middle">
         <thead>
             <tr>
                 <th>
@@ -44,13 +52,12 @@
                     @Html.DisplayFor(modelItem => item.Adresa)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Editeaza</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Detalii</a> |
-                    
                     <form asp-action="Delete" asp-route-id="@item.Id" method="post">
-                        <div>
-                            <input type="submit" value="Sterge" />
-                         </div>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning" method="get">Editeaza </a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary" type="button">Detalii </a> |
+                    
+                    
+                         <input type="submit" value="Sterge" class="btn btn-danger" />
                     </form>
                 </td>
             </tr>
