@@ -3,6 +3,9 @@
     public class CalendarViewModel
     {
         public List<CalendarViewModelcs> calendars { get; set; } = new List<CalendarViewModelcs>();
+        public String StartWeekDay { get; set; }
+
+        public int PrizaId { get; set; }
 
         public CalendarViewModel()
         {

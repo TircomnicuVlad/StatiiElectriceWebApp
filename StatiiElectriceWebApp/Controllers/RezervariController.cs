@@ -17,6 +17,8 @@ namespace StatiiElectriceWebApp.Controllers
         {
             RezervariViewModel rezervare = new RezervariViewModel();
             rezervare.PrizaId = id;
+            rezervare.StartDate = DateTime.Now;
+            rezervare.EndDate = DateTime.Now;
             return View(rezervare);
         }
 
@@ -25,6 +27,7 @@ namespace StatiiElectriceWebApp.Controllers
             if (ModelState.IsValid)
             {
                 Rezervari rezervari = new Rezervari(form.StartDate, form.EndDate, form.PrizaId, form.NrMasina);
+                TimeSpan ts = rezervari.EndDate - rezervari.StartDate;
                 if (rezervari.StartDate >= rezervari.EndDate)
                 {
                     ModelState.AddModelError(nameof(RezervariViewModel.EndDate), "Data sau ora invalida");
@@ -32,6 +35,10 @@ namespace StatiiElectriceWebApp.Controllers
                 else if (rezervari.StartDate < DateTime.Now)
                 {
                     ModelState.AddModelError(nameof(RezervariViewModel.StartDate), "Data sau ora invalida");
+                }
+                else if (ts.TotalMinutes < 30)
+                {
+                    ModelState.AddModelError(nameof(RezervariViewModel.EndDate), "Rezervearea trebuie sa fie de minim 30 de minute");
                 }
                 else
                 {

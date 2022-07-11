@@ -57,7 +57,8 @@
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary" type="button">Detalii </a> |
                     
                     
-                         <input type="submit" value="Sterge" class="btn btn-danger" />
+                         <input type="submit" value="Sterge" class="btn btn-danger" /> |
+                    <a class="btn btn-primary" href="@item.MapsSearch()" target="_blank">Maps</a>
                     </form>
                 </td>
             </tr>

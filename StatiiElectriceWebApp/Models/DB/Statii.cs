@@ -32,5 +32,11 @@ namespace StatiiElectriceWebApp.Models.DB
             Oras = oras;
             Adresa = adresa;
         }
+
+        public string MapsSearch()
+        {
+            string link = $"https://www.google.com/maps/search/?api=1&query={Oras}+{Adresa}";
+            return link;
+        }
     }
 }

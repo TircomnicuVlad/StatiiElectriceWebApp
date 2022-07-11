@@ -9,14 +9,14 @@
             <label asp-for="StartDate">Start</label>
         </div>
         <div>
-            <input asp-for="StartDate" value = "@DateTime.Now"/>
+            <input asp-for="StartDate" value = "@Model.StartDate.ToString("yyyy-MM-ddThh:mm")"/>
             <span asp-validation-for="StartDate" class="text-danger field-validation-valid"></span>
         </div>
         <div style="padding-top:1%">
             <label asp-for="EndDate" >End</label>
         </div>
         <div>
-            <input asp-for="EndDate" value = "@DateTime.Now"/>
+            <input asp-for="EndDate" value = "@Model.EndDate.ToString("yyyy-MM-ddThh:mm")"/>
             <span asp-validation-for="EndDate" class="text-danger field-validation-valid"></span>
         </div>
         <div>

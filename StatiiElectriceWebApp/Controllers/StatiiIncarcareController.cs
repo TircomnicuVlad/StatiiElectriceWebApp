@@ -118,5 +118,6 @@ namespace StatiiElectriceWebApp.Controllers
                 || s.Oras.Contains(txt)).ToList();
             return View("GetStatii", statii);
         }
+
     }
 }
