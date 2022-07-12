@@ -72,6 +72,10 @@
                         foreach (var item in Model.calendars[0].rezervari)
                         {
                             i++;
+                            if (i == 5)
+                            {
+                                i = 1;
+                            }
                             <li class="single-event" data-start="@item.StartDate.ToString("t")"
                             data-end="@item.EndDate.ToString("t")" data-event="event-@i">
                                 <a href="#0">
