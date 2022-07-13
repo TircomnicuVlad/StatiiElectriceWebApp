@@ -58,7 +58,8 @@
                     
                     
                          <input type="submit" value="Sterge" class="btn btn-danger" /> |
-                    <a class="btn btn-primary" href="@item.MapsSearch()" target="_blank">Maps</a>
+                    <a class="btn btn-primary" href="@item.MapsSearch()" target="_blank">Maps</a> |
+                    <a asp-action="Statistica" asp-route-id="@item.Id" class="btn btn-success" >Statistica</a>
                     </form>
                 </td>
             </tr>

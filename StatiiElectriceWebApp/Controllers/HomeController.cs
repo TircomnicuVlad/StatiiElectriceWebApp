@@ -51,27 +51,28 @@ namespace StatiiElectriceWebApp.Controllers
             _context.SaveChanges();
             */
 
-            double count = 24, y = 0;
+            double count = 7, y = 0;
             List<DataPoint> dataPoints = new List<DataPoint>();
 
             var day = DateTime.Now.StartOfWeek(DayOfWeek.Monday);
             DateTime startWeek = DateTime.Now.StartOfWeek(DayOfWeek.Monday);
+            DateTime start = startWeek.AddDays(-7).Date;
             List<Rezervari> calendar = _context.Rezervaris
                 .Where(r => r.StartDate.Date >= startWeek.AddDays(-7) &&
             r.StartDate.Date <= startWeek.AddDays(-1))
-                .OrderBy(r => r.StartDate.Hour)
+                .OrderBy(r => r.StartDate)
                 .ToList();
 
             int j = 0;
-            for (int i = 0; i <= count; i++)
+            for (DateTime i = start; i < start.AddDays(count); i = i.AddDays(1))
             {
                 y = 0;
-                while (j < calendar.Count && calendar[j].StartDate.Hour == i)
+                while (j < calendar.Count && calendar[j].StartDate.Date == i)
                 {
                     y++;
                     j++;
                 }
-                dataPoints.Add(new DataPoint(i, y));
+                dataPoints.Add(new DataPoint(i.DayOfWeek.ToString(), y));
             }
 
             ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);

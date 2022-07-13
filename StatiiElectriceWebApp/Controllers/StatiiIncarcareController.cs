@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using StatiiElectriceWebApp.Models.DB;
 using Microsoft.EntityFrameworkCore;
 using System.Dynamic;
+using StatiiElectriceWebApp.Models.ViewModels;
+using Newtonsoft.Json;
 
 namespace StatiiElectriceWebApp.Controllers
 {
@@ -10,7 +12,7 @@ namespace StatiiElectriceWebApp.Controllers
     {
         private readonly StatiiIncarcareElectriceContext _statiiIncarcare;
 
-        public StatiiIncarcareController (StatiiIncarcareElectriceContext statiiIncarcare)
+        public StatiiIncarcareController(StatiiIncarcareElectriceContext statiiIncarcare)
         {
             _statiiIncarcare = statiiIncarcare;
         }
@@ -25,7 +27,7 @@ namespace StatiiElectriceWebApp.Controllers
         // GET: StatiiIncarcareController/Details/5
         public ActionResult Details(int id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return NotFound();
             }
@@ -37,10 +39,10 @@ namespace StatiiElectriceWebApp.Controllers
                 return NotFound();
             }
 
-           /* statie.Prizes = _statiiIncarcare.Prizes.Where(p => p.StatieId.Equals(statie.Id)).ToArray();
-            foreach (Prize item in statie.Prizes){
-                item.Tip = _statiiIncarcare.Tips.FirstOrDefault(t => t.Id == item.TipId);
-            }*/
+            /* statie.Prizes = _statiiIncarcare.Prizes.Where(p => p.StatieId.Equals(statie.Id)).ToArray();
+             foreach (Prize item in statie.Prizes){
+                 item.Tip = _statiiIncarcare.Tips.FirstOrDefault(t => t.Id == item.TipId);
+             }*/
 
             return View(statie);
         }
@@ -55,7 +57,7 @@ namespace StatiiElectriceWebApp.Controllers
         // POST: StatiiIncarcareController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( IFormCollection form)
+        public ActionResult Create(IFormCollection form)
         {
             Statii statie = new Statii(form["nume"], form["oras"], form["adresa"]);
             _statiiIncarcare.
@@ -86,7 +88,7 @@ namespace StatiiElectriceWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(IFormCollection form)
         {
-            var statie = new Statii(Int32.Parse(form["id"]) ,form["nume"], form["Oras"], form["Adresa"]);
+            var statie = new Statii(Int32.Parse(form["id"]), form["nume"], form["Oras"], form["Adresa"]);
 
             _statiiIncarcare.Statiis.Update(statie);
             _statiiIncarcare.SaveChanges();
@@ -113,10 +115,41 @@ namespace StatiiElectriceWebApp.Controllers
                 return RedirectToAction("GetStatii");
             }
 
-            List <Statii> statii = _statiiIncarcare.Statiis.
-                Where(s => s.Nume.Contains(txt) || s.Adresa.Contains(txt) 
+            List<Statii> statii = _statiiIncarcare.Statiis.
+                Where(s => s.Nume.Contains(txt) || s.Adresa.Contains(txt)
                 || s.Oras.Contains(txt)).ToList();
             return View("GetStatii", statii);
+        }
+
+        public ActionResult Statistica(int id)
+        {
+            double count = 7, y = 0;
+            List<DataPoint> dataPoints = new List<DataPoint>();
+
+            var day = DateTime.Now.StartOfWeek(DayOfWeek.Monday);
+            DateTime startWeek = DateTime.Now.StartOfWeek(DayOfWeek.Monday);
+            DateTime start = startWeek.AddDays(-7).Date;
+            List<Rezervari> calendar = _statiiIncarcare.Rezervaris.Include(r => r.Priza)
+                .Where(r => r.StartDate.Date >= startWeek.AddDays(-7) &&
+                    r.StartDate.Date <= startWeek.AddDays(-1) && r.Priza.StatieId == id)
+                .OrderBy(r => r.StartDate)
+                .ToList();
+
+            int j = 0;
+            for (DateTime i = start; i < start.AddDays(count); i = i.AddDays(1))
+            {
+                y = 0;
+                while (j < calendar.Count && calendar[j].StartDate.Date == i)
+                {
+                    y++;
+                    j++;
+                }
+                dataPoints.Add(new DataPoint(i.DayOfWeek.ToString(), y));
+            }
+
+            ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
+
+            return View();
         }
 
     }

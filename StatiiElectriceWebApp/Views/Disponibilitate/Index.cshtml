@@ -67,7 +67,32 @@
 
     <div class="events">
         <ul class="wrap">
-            <li class="events-group">
+            @for (var k = 0; k < 7; k++)
+            {
+                <li class="events-group">
+                    <div class="top-info"><span>@DateTime.Parse(Model.StartWeekDay).AddDays(k).DayOfWeek<br /> @Model.calendars[k].Date.ToString("d")</span></div>
+                    <ul>
+                        @{
+                            var i = 0;
+                            foreach (var item in Model.calendars[k].rezervari)
+                            {
+                                i++;
+                                if (i == 5)
+                                {
+                                    i = 1;
+                                }
+                                <li class="single-event" data-start="@item.StartDate.ToString("t")"
+                            data-end="@item.EndDate.ToString("t")" data-event="event-@i">
+                                    <a href="#0">
+                                        <em class="event-name">@item.NrMasina</em>
+                                    </a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </li>
+            }
+@*            <li class="events-group">
                 <div class="top-info"><span>Monday <br /> @Model.calendars[0].Date.ToString("d")</span></div>
                 <ul>
                     @{
@@ -203,7 +228,7 @@
                         }
                     }
                 </ul>
-            </li>
+            </li>*@
             <!--        -->
         </ul>
     </div>
