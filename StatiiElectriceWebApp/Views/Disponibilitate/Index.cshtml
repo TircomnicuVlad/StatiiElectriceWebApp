@@ -3,9 +3,12 @@
 @model CalendarViewModel
 
 <br />
-<div>
-    <a asp-controller="Disponibilitate" asp-action="Previous" asp-route-id="@Model.PrizaId" asp-route-startDate="@Model.StartWeekDay" class="btn btn-primary">Saptamana trecuta</a>
-    <a asp-controller="Disponibilitate" asp-action="Next" asp-route-id="@Model.PrizaId" asp-route-startDate="@Model.StartWeekDay" class="btn btn-primary">Saptamana urmatoare</a>
+
+<div class="center">
+    <a asp-controller="Disponibilitate" asp-action="Previous" asp-route-id="@Model.PrizaId" class="btn btn-primary">Saptamana trecuta</a>
+    <span style="margin-left:10%; margin-right:10%">@DateTime.Parse(Model.StartWeekDay).ToShortDateString() - @DateTime.Parse(Model.StartWeekDay).AddDays(6).Date.ToShortDateString()</span>
+    <a asp-controller="Disponibilitate" asp-action="Next" asp-route-id="@Model.PrizaId" class="btn btn-primary">Saptamana urmatoare</a>
+    
 </div>
 <div class="cd-schedule loading">
     <div class="timeline">
@@ -76,12 +79,12 @@
                             {
                                 i = 1;
                             }
-                            <li class="single-event" data-start="@item.StartDate.ToString("t")"
-                            data-end="@item.EndDate.ToString("t")" data-event="event-@i">
-                                <a href="#0">
-                                    <em class="event-name">@item.NrMasina</em>
-                                </a>
-                            </li>
+                                    <li class="single-event" data-start="@item.StartDate.ToString("t")"
+                                    data-end="@item.EndDate.ToString("t")" data-event="event-@i">
+                                        <a>
+                                            <em class="event-name">@item.NrMasina</em>
+                                        </a>
+                                    </li>
                         }
                     }
                 </ul>
@@ -95,12 +98,12 @@
                         i = 0;
                         foreach (var item in Model.calendars[1].rezervari)
                         {
-                            <li class="single-event" data-start="@item.StartDate.ToString("t")"
-                            data-end="@item.EndDate.ToString("t")" data-event="event-1">
-                                <a href="#0">
-                                    <em class="event-name">@item.NrMasina</em>
-                                </a>
-                            </li>
+                                    <li class="single-event" data-start="@item.StartDate.ToString("t")"
+                                    data-end="@item.EndDate.ToString("t")" data-event="event-1">
+                                        <a href="">
+                                            <em class="event-name">@item.NrMasina</em>
+                                        </a>
+                                    </li>
                         }
                     }
                 </ul>
@@ -115,7 +118,7 @@
                         i++;
                         <li class="single-event" data-start="@item.StartDate.ToString("t")"
                         data-end="@item.EndDate.ToString("t")" data-event="event-@i">
-                            <a href="#0">
+                            <a href="">
                                 <em class="event-name">@item.NrMasina</em>
                             </a>
                         </li>
@@ -132,12 +135,12 @@
                         foreach (var item in Model.calendars[3].rezervari)
                         {
                             i++;
-                            <li class="single-event" data-start="@item.StartDate.ToString("t")"
-                            data-end="@item.EndDate.ToString("t")" data-event="event-@i">
-                                <a href="#0">
-                                    <em class="event-name">@item.NrMasina</em>
-                                </a>
-                            </li>
+                                    <li class="single-event" data-start="@item.StartDate.ToString("t")"
+                                    data-end="@item.EndDate.ToString("t")" data-event="event-@i">
+                                        <a>
+                                            <em class="event-name">@item.NrMasina</em>
+                                        </a>
+                                    </li>
                         }
                     }
                 </ul>
@@ -152,12 +155,12 @@
                         foreach (var item in Model.calendars[4].rezervari)
                         {
                             i++;
-                            <li class="single-event" data-start="@item.StartDate.ToString("t")"
-                            data-end="@item.EndDate.ToString("t")" data-event="event-@i">
-                                <a href="#0">
-                                    <em class="event-name">@item.NrMasina</em>
-                                </a>
-                            </li>
+                                    <li class="single-event" data-start="@item.StartDate.ToString("t")"
+                                    data-end="@item.EndDate.ToString("t")" data-event="event-@i">
+                                        <a href="#0">
+                                            <em class="event-name">@item.NrMasina</em>
+                                        </a>
+                                    </li>
                         }
                     }
                 </ul>
@@ -171,12 +174,12 @@
                         foreach (var item in Model.calendars[5].rezervari)
                         {
                             i++;
-                            <li class="single-event" data-start="@item.StartDate.ToString("t")"
-                            data-end="@item.EndDate.ToString("t")" data-event="event-@i">
-                                <a href="#0">
-                                    <em class="event-name">@item.NrMasina</em>
-                                </a>
-                            </li>
+                                    <li class="single-event" data-start="@item.StartDate.ToString("t")"
+                                    data-end="@item.EndDate.ToString("t")" data-event="event-@i">
+                                        <a href="#0">
+                                            <em class="event-name">@item.NrMasina</em>
+                                        </a>
+                                    </li>
                         }
                     }
                 </ul>
@@ -191,12 +194,12 @@
                         foreach (var item in Model.calendars[6].rezervari)
                         {
                             i++;
-                            <li class="single-event" data-start="@item.StartDate.ToString("t")"
-                            data-end="@item.EndDate.ToString("t")" data-event="event-@i">
-                                <a href="#0">
-                                    <em class="event-name">@item.NrMasina</em>
-                                </a>
-                            </li>
+                                    <li class="single-event" data-start="@item.StartDate.ToString("t")"
+                                    data-end="@item.EndDate.ToString("t")" data-event="event-@i">
+                                        <a href="#0">
+                                            <em class="event-name">@item.NrMasina</em>
+                                        </a>
+                                    </li>
                         }
                     }
                 </ul>

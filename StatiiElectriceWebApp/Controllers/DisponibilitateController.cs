@@ -16,6 +16,8 @@ namespace StatiiElectriceWebApp.Controllers
     public class DisponibilitateController : Controller
     {
         private readonly StatiiIncarcareElectriceContext _context;
+        private static DateTime _currentWeek = DateTime.Now.StartOfWeek(DayOfWeek.Monday);
+
 
         public DisponibilitateController(StatiiIncarcareElectriceContext statiiIncarcare)
         {
@@ -38,7 +40,7 @@ namespace StatiiElectriceWebApp.Controllers
             //var z = y.StartDate;
             //var x = DateTime.Now.StartOfWeek(DayOfWeek.Saturday);
             //var k = z.Date == x.Date;
-          
+            _currentWeek = startWeek;
             calendar.StartWeekDay = startWeek.ToString();
             var i = 0;
             foreach (var item in calendar.calendars)
@@ -53,9 +55,9 @@ namespace StatiiElectriceWebApp.Controllers
             return calendar;
         }
 
-        public IActionResult Next(string startDate, int id)
+        public IActionResult Next(int id)
         {
-            var day = DateTime.Parse(startDate).AddDays(7).StartOfWeek(DayOfWeek.Monday);
+            var day = _currentWeek.AddDays(7).StartOfWeek(DayOfWeek.Monday);
             CalendarViewModel calendar = GetBookingsForWeek(id, day);
             return View("Index", calendar);
             //calendar.Iterator++;
@@ -71,9 +73,9 @@ namespace StatiiElectriceWebApp.Controllers
             //}
             //return View("Index", calendar);
         }
-        public IActionResult Previous(string startDate, int id)
+        public IActionResult Previous(int id)
         {
-            var day = DateTime.Parse(startDate).AddDays(-7).StartOfWeek(DayOfWeek.Monday);
+            var day = _currentWeek.AddDays(-7).StartOfWeek(DayOfWeek.Monday);
             CalendarViewModel calendar = GetBookingsForWeek(id, day);
             return View("Index", calendar);
         }
