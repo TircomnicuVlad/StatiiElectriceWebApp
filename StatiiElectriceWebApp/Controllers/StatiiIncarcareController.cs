@@ -152,5 +152,9 @@ namespace StatiiElectriceWebApp.Controllers
             return View();
         }
 
+        //public ActionResult Sort(int option)
+        //{
+        //    return View("GetStatii");
+        //}
     }
 }

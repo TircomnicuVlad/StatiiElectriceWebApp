@@ -72,7 +72,7 @@ namespace StatiiElectriceWebApp.Controllers
                     y++;
                     j++;
                 }
-                dataPoints.Add(new DataPoint(i.DayOfWeek.ToString(), y));
+                dataPoints.Add(new DataPoint($"{i.DayOfWeek.ToString()} ({i.Date.ToShortDateString()})", y));
             }
 
             ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
