@@ -15,6 +15,17 @@
         <td style="left:0">
             <a asp-action="Create" class="btn btn-success">Adauga Statie</a>
         </td>
+        <td style="right:45%; position:absolute; border-bottom:none">
+            <form asp-action="Sort">
+                <select name="option">
+                    <option value="0">-</option>
+                    <option value="1">Oras</option>
+                    <option value="2">Adresa</option>
+                    <option value="3">Nume</option>
+                </select>
+                <button type="submit" class="btn btn-info">Sorteaza</button>
+            </form>
+        </td>
         <td style="right:9%; position:absolute; border-bottom:none">
             <form asp-action="Filter" method="post" style="border-bottom:none">
                 <input type="text" placeholder="Search.." name="search">
@@ -40,30 +51,31 @@
             </tr>
         </thead>
         <tbody>
-    @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nume)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Oras)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Adresa)
-                </td>
-                <td>
-                    <form asp-action="Delete" asp-route-id="@item.Id" method="post">
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning" method="get">Editeaza </a> |
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary" type="button">Detalii </a> |
-                    
-                    
-                         <input type="submit" value="Sterge" class="btn btn-danger" /> |
-                    <a class="btn btn-primary" href="@item.MapsSearch()" target="_blank">Maps</a> |
-                    <a asp-action="Statistica" asp-route-id="@item.Id" class="btn btn-success" >Statistica</a>
-                    </form>
-                </td>
-            </tr>
-    }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nume)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Oras)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Adresa)
+                    </td>
+                    <td>
+                        <form asp-action="Delete" asp-route-id="@item.Id" method="post">
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning" method="get">Editeaza </a> |
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary" type="button">Detalii </a> |
+
+
+                            <input type="submit" value="Sterge" class="btn btn-danger" /> |
+                            <a class="btn btn-primary" href="@item.MapsSearch()" target="_blank">Maps</a> |
+                            <a asp-action="Statistica" asp-route-id="@item.Id" class="btn btn-success">Statistica</a>
+                        </form>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>

@@ -35,6 +35,12 @@ namespace StatiiElectriceWebApp.Controllers
         public IActionResult Delete(int id)
         {
             Prize p = _context.Prizes.FirstOrDefault(s => s.Id == id);
+            List<Rezervari> rezervari = _context.Rezervaris.Where(r => r.PrizaId == id).ToList();
+            foreach(Rezervari item in rezervari)
+            {
+                _context.Rezervaris.Remove(item);
+            }
+
             _context.Prizes.Remove(p);
             _context.SaveChanges();
             return RedirectToAction("Details", "StatiiIncarcare", new { id = p.StatieId });

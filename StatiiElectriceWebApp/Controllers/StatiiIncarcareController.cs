@@ -101,8 +101,21 @@ namespace StatiiElectriceWebApp.Controllers
         public ActionResult Delete(int id)
         {
             Statii statie = _statiiIncarcare.Statiis.FirstOrDefault(s => s.Id == id);
+            List<Prize> prize = _statiiIncarcare.Prizes.Where(p => p.StatieId == id).ToList();
+            List<Rezervari> rezervari;
+
+            foreach (Prize item in prize)
+            {
+                rezervari = _statiiIncarcare.Rezervaris.Where(r => r.PrizaId == item.Id).ToList();
+                foreach (Rezervari rezervari1 in rezervari)
+                {
+                    _statiiIncarcare.Rezervaris.Remove(rezervari1);
+                }
+                _statiiIncarcare.Prizes.Remove(item);
+            }
 
             _statiiIncarcare.Statiis.Remove(statie);
+
             _statiiIncarcare.SaveChanges();
             return RedirectToAction("GetStatii");
         }
@@ -144,7 +157,7 @@ namespace StatiiElectriceWebApp.Controllers
                     y++;
                     j++;
                 }
-                dataPoints.Add(new DataPoint(i.DayOfWeek.ToString(), y));
+                dataPoints.Add(new DataPoint($"{i.DayOfWeek.ToString()} ({i.Date.ToShortDateString()})", y));
             }
 
             ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
@@ -152,9 +165,29 @@ namespace StatiiElectriceWebApp.Controllers
             return View();
         }
 
-        //public ActionResult Sort(int option)
-        //{
-        //    return View("GetStatii");
-        //}
+        public ActionResult Sort(IFormCollection form)
+        {
+            int option = Int32.Parse(form["option"]);
+            List<Statii> statii;
+            switch (option)
+            {
+                case 1:
+                    statii = _statiiIncarcare.Statiis.OrderBy(r => r.Oras).ToList();
+                    break;
+
+                case 2:
+                    statii = _statiiIncarcare.Statiis.OrderBy(r => r.Adresa).ToList();
+                    break;
+
+                case 3:
+                    statii = _statiiIncarcare.Statiis.OrderBy(r => r.Nume).ToList();
+                    break;
+
+                default:
+                    statii = _statiiIncarcare.Statiis.ToList();
+                    break;
+            }
+            return View("GetStatii", statii);
+        }
     }
 }
