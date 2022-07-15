@@ -19,39 +19,25 @@ namespace StatiiElectriceWebApp.Controllers
             _context = context;
         }
 
-        private CalendarViewModel GetBookingsForWeek(DateTime startWeek)
-        {
-            CalendarViewModel calendar = new CalendarViewModel();
-
-            calendar.StartWeekDay = startWeek.ToString();
-            var i = -7;
-            foreach (var item in calendar.calendars)
-            {
-                item.Date = startWeek.AddDays(i).Date;
-                item.rezervari = _context.Rezervaris.
-                    Where(r => r.StartDate.Date == startWeek.AddDays(i))
-                    .ToList();
-                i++;
-            }
-
-            return calendar;
-        }
         public ActionResult Index()
         {
-            /*Seeding rudimentar
-            DateTime StartTime = DateTime.Parse("2022-07-04 00:00:00.000");
-            DateTime EndTime = DateTime.Parse("2022-07-04 01:00:00.000");
-            for (int k = 0; k < 24; k++)
-            {
-                StartTime = StartTime.AddHours(k);
-                EndTime = EndTime.AddHours(k);
-                Rezervari rezervari = new Rezervari(StartTime, EndTime, 1, "OT01VLD");
-                _context.Rezervaris.Add(rezervari);
-            }
-            _context.SaveChanges();
-            */
+            //Seeding rudimentar
+            //DateTime StartTime = DateTime.Parse("2022-07-04 01:00:00.000");
+            //DateTime EndTime = DateTime.Parse("2022-07-04 02:00:00.000");
+            //for (int k = 0; k < 7; k++)
+            //{
+            //    for (int k1 = 0; k1 < 11; k1++)
+            //    {
+            //        Rezervari rezervari = new Rezervari(StartTime, EndTime, 2, "TM77NTR");
+            //        _context.Rezervaris.Add(rezervari);
+            //        StartTime = StartTime.AddHours(2);
+            //        EndTime = EndTime.AddHours(2);
+            //    }
+            //}
+            //_context.SaveChanges();
 
-            double count = 7, y = 0;
+
+            double count = 7, y;
             List<DataPoint> dataPoints = new List<DataPoint>();
 
             var day = DateTime.Now.StartOfWeek(DayOfWeek.Monday);

@@ -26,17 +26,22 @@ namespace StatiiElectriceWebApp.Controllers
         public IActionResult Add(PrizaViewModel model)
         {
             //Prize p = new Prize(Int32.Parse(model["StationId"]), Int32.Parse(model["Tip"]));
-            Prize p = new Prize(model.Tip, model.StationId);
-            _context.Add(p);
-            _context.SaveChanges();
-            return RedirectToAction("Details", "StatiiIncarcare", new {id = model.StationId });
+            if (model.Tip != 0)
+            {
+                Prize p = new Prize(model.Tip, model.StationId);
+                _context.Add(p);
+                _context.SaveChanges();
+                return RedirectToAction("Details", "StatiiIncarcare", new { id = model.StationId });
+            }
+            model.Tipuri = _context.Tips.ToList();
+            return View("AddToStation",model);
         }
 
         public IActionResult Delete(int id)
         {
             Prize p = _context.Prizes.FirstOrDefault(s => s.Id == id);
             List<Rezervari> rezervari = _context.Rezervaris.Where(r => r.PrizaId == id).ToList();
-            foreach(Rezervari item in rezervari)
+            foreach (Rezervari item in rezervari)
             {
                 _context.Rezervaris.Remove(item);
             }

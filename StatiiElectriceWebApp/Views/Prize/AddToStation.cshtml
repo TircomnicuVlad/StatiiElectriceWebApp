@@ -10,7 +10,7 @@
         </div>
         <div>
             <select name= "Tip" asp-for = "Tip">
-                <option>Selecteaza tipul de priza</option>
+                <option value="0">Selecteaza tipul de priza</option>
                 @foreach (var item in Model.Tipuri)
                 {
                     <option value="@item.Id">@item.Nume</option>
